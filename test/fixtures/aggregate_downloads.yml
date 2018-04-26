@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  episode: one
+  day: 2018-04-25
+  volume: 
+  hits: 
+  count: 
+
+two:
+  episode: two
+  day: 2018-04-25
+  volume: 
+  hits: 
+  count: 

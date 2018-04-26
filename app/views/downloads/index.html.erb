@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Downloads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Podcast</th>
+      <th>Episode</th>
+      <th>Day</th>
+      <th>Size</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @downloads.each do |download| %>
+      <tr>
+        <td><%= download.episode.podcast %></td>
+        <td><%= download.episode.name %></td>
+        <td><%= download.day %></td>
+        <td><%= download.size %></td>
+        <td><%= link_to 'Show', download %></td>
+        <td><%= link_to 'Edit', edit_download_path(download) %></td>
+        <td><%= link_to 'Destroy', download, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Download', new_download_path %>

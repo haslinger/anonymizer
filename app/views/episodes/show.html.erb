@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Podcast:</strong>
+  <%= @episode.podcast %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @episode.name %>
+</p>
+
+<p>
+  <strong>Filesize:</strong>
+  <%= @episode.filesize %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @episode.number %>
+</p>
+
+<%= link_to 'Edit', edit_episode_path(@episode) %> |
+<%= link_to 'Back', episodes_path %>

@@ -1,0 +1,42 @@
+<%= form_with(model: aggregate_download, local: true) do |form| %>
+  <% if aggregate_download.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(aggregate_download.errors.count, "error") %> prohibited this aggregate_download from being saved:</h2>
+
+      <ul>
+      <% aggregate_download.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :episode_id %>
+    <%= form.text_field :episode_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :day %>
+    <%= form.date_select :day %>
+  </div>
+
+  <div class="field">
+    <%= form.label :volume %>
+    <%= form.text_field :volume %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hits %>
+    <%= form.text_field :hits %>
+  </div>
+
+  <div class="field">
+    <%= form.label :count %>
+    <%= form.text_field :count %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
