@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Aggregate Downloads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Podcast</th>
+      <th>Episode</th>
+      <th>Download <br/>Volume (MB)</th>
+      <th>Hits</th>
+      <th>Downloads</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @aggregate_downloads.each do |aggregate_download| %>
+      <tr>
+        <td><%= aggregate_download.episode.podcast %></td>
+        <td><%= aggregate_download.episode.name %></td>
+        <td align="right"><%= aggregate_download.volume / 1048576 %></td>
+        <td align="right"><%= aggregate_download.hits %></td>
+        <td align="right"><%= aggregate_download.volume / aggregate_download.episode.filesize.to_i %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

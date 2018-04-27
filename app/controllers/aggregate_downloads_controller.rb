@@ -7,6 +7,15 @@ class AggregateDownloadsController < ApplicationController
     @aggregate_downloads = AggregateDownload.all.includes(:episode)
   end
 
+
+  def report
+    @aggregate_downloads = AggregateDownload.select("sum(hits) as hits, sum(volume) as volume, sum(count) as count, episode_id")
+                                            .group(:episode_id)
+                                            .includes(:episode)
+                                            .all
+                                            .sort_by{ |ad| ad.episode.podcast.length() * 100 + ad.episode.number }
+  end
+
   # GET /aggregate_downloads/1
   # GET /aggregate_downloads/1.json
   def show
