@@ -23,15 +23,6 @@ ActiveRecord::Schema.define(version: 2018_04_25_190444) do
     t.index ["episode_id"], name: "index_aggregate_downloads_on_episode_id"
   end
 
-  create_table "downloads", force: :cascade do |t|
-    t.integer "episode_id"
-    t.date "day"
-    t.integer "size", limit: 8
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["episode_id"], name: "index_downloads_on_episode_id"
-  end
-
   create_table "episodes", force: :cascade do |t|
     t.string "podcast"
     t.string "name"
