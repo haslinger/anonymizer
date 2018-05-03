@@ -1,10 +1,10 @@
-<%= form_with(model: aggregate_download, local: true) do |form| %>
-  <% if aggregate_download.errors.any? %>
+<%= form_with(model: download, local: true) do |form| %>
+  <% if download.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(aggregate_download.errors.count, "error") %> prohibited this aggregate_download from being saved:</h2>
+      <h2><%= pluralize(download.errors.count, "error") %> prohibited this download from being saved:</h2>
 
       <ul>
-      <% aggregate_download.errors.full_messages.each do |message| %>
+      <% download.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Episode:</strong>
+  <%= @download.episode %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @download.day %>
+</p>
+
+<p>
+  <strong>Volume:</strong>
+  <%= @download.volume %>
+</p>
+
+<p>
+  <strong>Hits:</strong>
+  <%= @download.hits %>
+</p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @download.count %>
+</p>
+
+<%= link_to 'Edit', edit_download_path(@download) %> |
+<%= link_to 'Back', downloads_path %>

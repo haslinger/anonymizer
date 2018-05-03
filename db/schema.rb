@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_04_25_190444) do
 
-  create_table "aggregate_downloads", force: :cascade do |t|
+  create_table "downloads", force: :cascade do |t|
     t.integer "episode_id"
     t.date "day"
     t.integer "volume", limit: 8
@@ -20,16 +20,16 @@ ActiveRecord::Schema.define(version: 2018_04_25_190444) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["episode_id"], name: "index_aggregate_downloads_on_episode_id"
+    t.index ["episode_id"], name: "index_downloads_on_episode_id"
   end
 
   create_table "episodes", force: :cascade do |t|
     t.string "podcast"
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "number"
     t.string "filesize"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "podcasts", force: :cascade do |t|

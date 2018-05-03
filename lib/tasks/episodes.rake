@@ -2,7 +2,7 @@ namespace :episodes do
 
 
   task fix: :environment do
-    AggregateDownload.where("count > ?", 1000).each do |download|
+    Download.where("count > ?", 1000).each do |download|
       episode = Episode.find(download.episode_id)
       download.update(count: (download.volume.to_f / episode.filesize.to_f).ceil)
     end
@@ -21,7 +21,7 @@ namespace :episodes do
     filename_regex = /.*\/(.*)\..*\z/
 
     zipfiles.each do |zipfile |
-      downloads = AggregateDownload.all.to_a
+      downloads = Download.all.to_a
 
       Zlib::GzipReader.open(zipfile) do |reader|
         puts "Parsing file " +  File.basename(zipfile)
@@ -55,7 +55,7 @@ namespace :episodes do
                                          volume: (download.volume + size).to_i,
                                          count: ((download.volume + size).to_f / episode.filesize.to_f).ceil)
             else
-              downloads << AggregateDownload.new(day: day,
+              downloads << Download.new(day: day,
                                                  episode: episode,
                                                  hits: 1,
                                                  volume: size,
@@ -66,10 +66,10 @@ namespace :episodes do
       end
 
       puts "Deleting old stats"
-      AggregateDownload.delete_all
+      Download.delete_all
 
       puts "Persisting new stats"
-      AggregateDownload.import downloads
+      Download.import downloads
 
       puts "Vacuum Database"
       ActiveRecord::Base.connection.execute("VACUUM")
