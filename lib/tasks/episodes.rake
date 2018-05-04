@@ -16,7 +16,7 @@ namespace :episodes do
     path_to_logfiles =
       Rails.env == "development" ? "./logfiles/" : "/var/log/apache2/"
 
-    zipfiles = Dir[path_to_logfiles + "*.gz"]
+    zipfiles = Dir[path_to_logfiles + "other_vhosts_access.log.*.gz"]
     logline_regex = /(.*):.* - .* \[(\d*)\/(\w*)\/(\d*).*\] .* (.*) .* \d* (\d*) .*/
     filename_regex = /.*\/(.*)\..*\z/
 
@@ -73,9 +73,6 @@ namespace :episodes do
 
       puts "Vacuum Database"
       ActiveRecord::Base.connection.execute("VACUUM")
-
-      puts "Deleteing Log file " +  File.basename(zipfile)
-      File.delete(zipfile)
     end
   end
 end
