@@ -4,7 +4,11 @@ class DownloadsController < ApplicationController
   # GET /downloads
   # GET /downloads.json
   def index
-    @downloads = Download.all.includes(:episode)
+    @downloads = Download.all
+                         .order(:count)
+                         .order("episodes.podcast")
+                         .where(episodes: {podcast: "3-schweinehun.de"})
+                         .includes(:episode)
   end
 
 
@@ -14,6 +18,12 @@ class DownloadsController < ApplicationController
                                             .includes(:episode)
                                             .all
                                             .sort_by{ |ad| ad.episode.podcast.length() * 100 + ad.episode.number }
+
+    @auauffcode = Download.select("sum(count) as MYCOUNT")
+                          .includes(:episode)
+                          .where(episodes: {podcast: "3-schweinehun.de"})
+                          .group_by_month(:day)
+                          .sum(:count)
   end
 
   # GET /downloads/1
