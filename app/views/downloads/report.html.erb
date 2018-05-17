@@ -1,11 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <% @downloads.each do |podcast, downloads| %>
-
-  <% data = downloads.map{|d| [d.name, d.volume.to_f / d.filesize.to_i]} %>
-
-  <%= column_chart(Hash[downloads.collect{|d| [d.name,
-                                               d.volume / d.filesize.to_i]}],
+  <%= column_chart(downloads.map{|d| [d.name, d.volume.to_f / d.filesize.to_i]},
                    library: {title: {display: true, text: podcast},
                              scales: { xAxes: [{maxBarThickness: 70 }]}}) %>
 <% end %>
