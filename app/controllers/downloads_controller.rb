@@ -13,17 +13,15 @@ class DownloadsController < ApplicationController
 
 
   def report
-    @downloads = Download.select("sum(hits) as hits, sum(volume) as volume, sum(count) as count, episode_id")
-                                            .group(:episode_id)
-                                            .includes(:episode)
-                                            .all
-                                            .sort_by{ |ad| ad.episode.podcast.length() * 100 + ad.episode.number }
-
-    @auauffcode = Download.select("sum(count) as MYCOUNT")
-                          .includes(:episode)
-                          .where(episodes: {podcast: "3-schweinehun.de"})
-                          .group_by_month(:day)
-                          .sum(:count)
+    @downloads = Download.joins(:episode)
+                         .select(:name,
+                                 "episodes.filesize AS filesize",
+                                 "episodes.podcast AS podcast",
+                                 "sum(volume) AS volume")
+                         .where("episodes.number < 999")
+                         .order("episodes.number")
+                         .group("episodes.podcast", "episodes.number")
+                         .group_by(&:podcast)
   end
 
   # GET /downloads/1

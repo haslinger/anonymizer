@@ -1,31 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<%= @auauffcode.first %>
+<% @downloads.each do |podcast, downloads| %>
 
-<%= line_chart @auauffcode %>
+  <% data = downloads.map{|d| [d.name, d.volume.to_f / d.filesize.to_i]} %>
 
-<h1>Aggregate Downloads</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Podcast</th>
-      <th>Episode</th>
-      <th>Download <br/>Volume (MB)</th>
-      <th>Hits</th>
-      <th>Downloads</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @downloads.each do |download| %>
-      <tr>
-        <td><%= download.episode.podcast %></td>
-        <td><%= download.episode.name %></td>
-        <td align="right"><%= download.volume / 1048576 %></td>
-        <td align="right"><%= download.hits %></td>
-        <td align="right"><%= download.volume / download.episode.filesize.to_i %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <%= column_chart(Hash[downloads.collect{|d| [d.name,
+                                               d.volume / d.filesize.to_i]}],
+                   library: {title: {display: true, text: podcast},
+                             scales: { xAxes: [{maxBarThickness: 70 }]}}) %>
+<% end %>
