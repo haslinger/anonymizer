@@ -4,4 +4,6 @@
   <%= column_chart(downloads.map{|d| [d.name, d.volume.to_f / d.filesize.to_i]},
                    library: {title: {display: true, text: podcast},
                              scales: { xAxes: [{maxBarThickness: 70 }]}}) %>
+
+  <%= link_to "details", trend_download_path(Podcast.find_by_name(podcast)) %>
 <% end %>

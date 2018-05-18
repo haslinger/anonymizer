@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     collection do
       get 'report'
     end
+
+    member do
+      get 'trend'
+    end
   end
 
   resources :podcasts
