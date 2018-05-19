@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<% @downloads.each do |episode, downloads| %>
+<%= column_chart(@downloads.map{|d| [d.name, d.volume.to_f / d.filesize.to_i]},
+                 library: {title: {display: true, text: @title},
+                           scales: { xAxes: [{maxBarThickness: 70 }]}}) %>
+
+<br/><br/><br/><br/>
+
+<% @downloads_by_episode.each do |episode, downloads| %>
   <%= line_chart downloads.map{|d| [d.day.to_s, (d.volume.to_f / d.filesize.to_i).ceil]},
                  library: {title: {display: true, text: @episodes.select{|e| e.number == episode}.first.name}} %>
   <br/><br/><br/><br/>

@@ -25,16 +25,29 @@ class DownloadsController < ApplicationController
   end
 
   def trend
+    @title = Podcast.find(params[:id]).name
+
     @downloads = Download.joins(episode: :podcast)
-                         .select(:day,
-                                 "episodes.name AS name",
-                                 "episodes.number AS number",
+                         .select("episodes.name AS name",
                                  "episodes.filesize AS filesize",
+                                 "episodes.podcast AS podcast",
                                  "sum(volume) AS volume")
+                         .where("episodes.number < 999")
                          .where("podcasts.id = ?", params[:id])
-                         .where("number < 999")
-                         .group(:number, :day)
-                         .group_by(&:number)
+                         .group("episodes.podcast", "episodes.number")
+                         .order("episodes.number")
+
+    @downloads_by_episode =
+      Download.joins(episode: :podcast)
+              .select(:day,
+                      "episodes.name AS name",
+                      "episodes.number AS number",
+                      "episodes.filesize AS filesize",
+                      "sum(volume) AS volume")
+              .where("podcasts.id = ?", params[:id])
+              .where("number < 999")
+              .group(:number, :day)
+              .group_by(&:number)
 
    @episodes = Episode.joins(:podcast).where("podcasts.id = ?", params[:id])
   end
