@@ -38,7 +38,7 @@ class DownloadsController < ApplicationController
                          .order("episodes.number")
 
     @downloads_by_episode =
-      Download.joins(episode: :podcast)
+      Download.joins(episode: :thepodcast)
               .select(:day,
                       "episodes.name AS name",
                       "episodes.number AS number",
