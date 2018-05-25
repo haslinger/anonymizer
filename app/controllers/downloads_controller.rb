@@ -27,7 +27,7 @@ class DownloadsController < ApplicationController
   def trend
     @title = Podcast.find(params[:id]).name
 
-    @downloads = Download.joins(episode: :podcast)
+    @downloads = Download.joins(episode: :thepodcast)
                          .select("episodes.name AS name",
                                  "episodes.filesize AS filesize",
                                  "episodes.podcast AS podcast",
@@ -49,7 +49,7 @@ class DownloadsController < ApplicationController
               .group(:number, :day)
               .group_by(&:number)
 
-   @episodes = Episode.joins(:podcast).where("podcasts.id = ?", params[:id])
+   @episodes = Episode.joins(:thepodcast).where("podcasts.id = ?", params[:id])
   end
 
 

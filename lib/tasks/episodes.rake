@@ -30,8 +30,7 @@ namespace :episodes do
 
         day = Date.new(matchdata[4].to_i, Date::ABBR_MONTHNAMES.index(matchdata[3]), matchdata[2].to_i)
         filename = filename_regex.match(matchdata[5])[1]
-
-        episode = Episode.joins(:podcast).find_or_create_by("podcasts.name": matchdata[1], name: filename)
+        episode = Episode.find_or_create_by(podcast: matchdata[1], name: filename)
         size = matchdata[6].to_i
 
         unless episode.filesize.to_i > 0
