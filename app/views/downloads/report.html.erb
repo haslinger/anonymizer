@@ -1,3 +1,7 @@
+<h1>Podcasts</h1>
+
+<h4>Download-Statistik der Podcasts von Stefan Haslinger (+ Friends)</h4>
+
 <p id="notice"><%= notice %></p>
 
 <% @downloads.each do |podcast, downloads| %>
@@ -5,5 +9,10 @@
                    library: {title: {display: true, text: podcast},
                              scales: { xAxes: [{maxBarThickness: 70 }]}}) %>
 
-  <%= link_to "details", trend_download_path(Podcast.find_by_name(podcast)) %>
+  <%= link_to "Details " + podcast, trend_download_path(Podcast.find_by_name(podcast)) %>
 <% end %>
+
+<hr/>
+
+<a href="https://informatom.com/impressum">Impressum</a> -
+<a href="https://informatom.com/datenschutz">Datenschutz</a>
