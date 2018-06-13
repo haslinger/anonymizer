@@ -41,7 +41,7 @@ namespace :episodes do
           Net::HTTP.start(url.host, url.port, use_ssl: url.scheme == 'https'){|http|
              response = http.head(url.path)
 
-             name_matches = /(\d+)/.match(episode.name)
+             name_matches = /(\d+)/.match(episode.name[1..-1])
              episode.update(filesize: [response.content_length.to_i, 1].max,
                             number: name_matches ? name_matches[1].to_i : "99")
           }
